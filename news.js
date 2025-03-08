@@ -15,11 +15,13 @@ let newsdata = await fetch(`${api_url}${query}&apiKey=${api_key}`)
 let data= await newsdata.json()
 
 store(data.articles)
+
 }
 
+
+
 function store(articles){   
- 
-    
+ab=articles  
 
 articles.forEach((v,i,p)=> {
 
@@ -27,8 +29,8 @@ date=new Date(v.publishedAt)
 date=date.toString()
 date=date.slice(0,15)
 
-card.innerHTML=`
-    <div class="card">
+card.innerHTML+=`
+    <div class="card" onclick="abc(${i})">
         <div class="card-header">
             <img id="img" src="${v.urlToImage}" alt="">
         </div>
@@ -40,13 +42,16 @@ card.innerHTML=`
                     
         </div> 
     </div>
-`
-    
+`   
 });
 
 }
 
 
+function abc(d){
 
+window.open(ab[d].url,"")    
+
+}
 
 
