@@ -4,25 +4,28 @@ const main=document.querySelector(".container")
 const card=document.querySelector(".card-container")
 
 
+
+
+
 window.addEventListener("load",()=>{
 fetchnews("india")    
 })
 
 
-async function fetchnews(query){
 
+async function fetchnews(query){
+    
+console.log(query)
 let newsdata = await fetch(`${api_url}${query}&apiKey=${api_key}`)
 let data= await newsdata.json()
-
 store(data.articles)
-
 }
 
 
 
 function store(articles){   
 ab=articles  
-
+card.innerHTML=""
 articles.forEach((v,i,p)=> {
 
 date=new Date(v.publishedAt)
@@ -53,5 +56,42 @@ function abc(d){
 window.open(ab[d].url,"")    
 
 }
+
+
+
+let ipl=document.getElementById("ipl")
+let finance=document.getElementById("finance")
+let politics=document.getElementById("politics")
+
+
+let array=[ipl,finance,politics]
+
+function xyz(){
+array.forEach((v,i)=>{
+
+v.style.color="#183b56"    
+    
+})
+}
+
+
+ipl.addEventListener("click",()=>{
+xyz()
+ipl.style.color="#1d69a3"
+fetchnews("ipl")
+})
+
+
+finance.addEventListener("click",()=>{
+xyz()
+finance.style.color="#1d69a3"
+fetchnews("finance")
+})
+
+politics.addEventListener("click",()=>{
+xyz()
+politics.style.color="#1d69a3"
+fetchnews("politics")
+})
 
 
