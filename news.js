@@ -28,6 +28,10 @@ ab=articles
 card.innerHTML=""
 articles.forEach((v,i,p)=> {
 
+if(v.urlToImage==null){
+return    
+}
+else{
 date=new Date(v.publishedAt)
 date=date.toString()
 date=date.slice(0,15)
@@ -46,12 +50,15 @@ card.innerHTML+=`
         </div> 
     </div>
 `   
+}
 });
 
 }
 
 
 function abc(d){
+
+console.log(ab[d].urlToImage)
 
 window.open(ab[d].url,"")    
 
@@ -62,6 +69,9 @@ window.open(ab[d].url,"")
 let ipl=document.getElementById("ipl")
 let finance=document.getElementById("finance")
 let politics=document.getElementById("politics")
+let newsinput=document.querySelector(".news-input")
+let searchbutton=document.querySelector(".search")
+
 
 
 let array=[ipl,finance,politics]
@@ -93,5 +103,20 @@ xyz()
 politics.style.color="#1d69a3"
 fetchnews("politics")
 })
+
+
+
+searchbutton.addEventListener("click",()=>{
+
+query=newsinput.value    
+
+if(query==""){
+return    
+}
+fetchnews(query)
+xyz()
+
+})
+
 
 
